@@ -1,6 +1,10 @@
 name: github-action-example
 
 on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
   schedule:
     - cron: "0,30 16-22 * * *"
 
@@ -15,5 +19,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
       - name: Build with Gradle
         run: ./gradlew build -x test
